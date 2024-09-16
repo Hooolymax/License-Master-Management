@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Masters: your software Licenses&apos; Manager</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="style/login_script.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header_title">
+            <h1 class="header_h1">License Masters</h1>
+            <a href="index.html"><img src="assets/images/License_MasterLogo3.PNG" alt="License Masters"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" alt="Home">Home</a></li>
+                <li><a href="nav2.html" alt="Shop">Shop</a></li>
+                <li><a href="nav3.html" alt="About Us">About Us</a></li>
+                <li><a href="nav4.html" alt="Contact Us">Contact Us</a></li>
+                <li class="cart-icon"><a href="cart.html"><img src="assets/images/cart-icon.png" alt=""></a></li>
+                <div class="dropdown">
+                    <button class="dropbtn"> Log In </button>
+                    <div class="dropdown-content">
+                      <a href="#" onclick="redirectEnduser()" class="enduser"> End-user Platform </a>
+                      <a href="#" onclick="redirectVendor()" class="vendor"> Vendor Platform </a>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section1">
+            <h2>License Management: <br>Your Rules, Your Way</h2>
+            <h4>Your Licenses, One-Click Away.</h4>
+            <a href="nav3.html" alt="Learn more">Learn more</a>
+            <video autoplay loop muted>
+            <source src="assets/videos/indexVideo.mp4" type="video/mp4">
+            </video>
+        </section>
+
+        <section class="section3">
+            <img src="assets/images/section3_left.jpg" alt="section3_left">
+            <div class="Info";>
+                <h2>Securing Your Licenses, Safeguarding Your Data</h2>
+                <p>At License Masters, we prioritize data security. Our software employs robust encryption, access controls, and authentication mechanisms to protect your sensitive information. We offer reliable backups, redundancy, and continuous monitoring to safeguard against data loss and promptly detect and mitigate potential threats. Choose us for a secure partner in preserving your data's confidentiality and integrity in today's digital landscape.</p>
+            </div>
+        </section>
+
+        <section class="section2">
+            <div>
+                <img src="assets/images/trusted_retailer.PNG" alt="Trusted Retailer" id="im1">
+                <h3>Trusted Retailer</h3>
+                <p>Trusted Source for Quality Shopping!</p>
+            </div>
+            <div>
+                <img src="assets/images/exclusive_finds.PNG" alt="Exclusive Finds" id="im2">
+                <h3>Exclusive Finds</h3>
+                <p>Discover the Exceptional</p>
+            </div>
+            <div>
+                <img src="assets/images/canada.PNG" alt="Born in Canada" id="im3">
+                <h3>Born in Canada</h3>
+                <p>Crafted in Canada, Loved Worldwide</p>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <h3>Get on the list!</h3>
+            <p>Enjoy early access, exclusive offers, and 15% off your first order.</p>
+            <form id="subscribeForm" onsubmit="subscribe(event)">
+                <input id="email" type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Submit</button>
+            </form>
+            <script>
+                function subscribe(event) {
+                    event.preventDefault(); // Prevent default form submission
+                    var email = document.getElementById('email').value;
+                    if (email !== '') {
+                        fetch('/subscribe', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ email: email })
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.text();
+                            }
+                            throw new Error('Network response was not ok.');
+                        })
+                        .then(data => {
+                            alert(data); // Show success message returned by the server
+                        })
+                        .catch(error => {
+                            console.error('Error subscribing to newsletter:', error);
+                            alert('Error subscribing to newsletter.');
+                        });
+                    } else {
+                        alert('Please enter a valid email address.');
+                    }
+                }
+            </script>
+        </section>
+    </main>
+    
+    <footer>
+        <p> Copyright © License Masters All rights Reserved.
+    </footer>
+
+</body>
+</html>
