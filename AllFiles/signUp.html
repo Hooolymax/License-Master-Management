@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Sign Up </title>
+    <link rel="stylesheet" href="style/signUp.css">
+</head>
+
+<body onload="noUserType()">
+    <div class="bgvideo">
+        <video playsinline autoplay muted loop>
+            <source src="assets/videos/indexVideo.mp4" type="video/mp4">
+        </video>
+    </div>
+    <section class="allContent">
+        <section class="signUpSection">
+            <h2> Sign Up </h2>
+            <p> Please fill this form to create an account. </p> 
+                <form id="signupForm" class = "mlContent" onsubmit="return redirecting(event);" method="post" action="/register">
+                    <label for = "name"> Name </label> 
+                        <input type = "text" name="name" placeholder = "Enter Name" required> 
+                    <label for = "email"> Email </label>
+                        <input type = "email" name="email" placeholder = "Enter Email" required>
+                    <label for = "password"> Password </label> 
+                        <input type = "password" name="password" placeholder = "Enter Password" required>
+                    <label for = "repeatPassword"> Repeat Password </label> 
+                        <input type = "password" name="repeatPassword" placeholder = "Repeat Password" required>
+
+                    <div class="termsandconds">
+                        <input type="checkbox"> </input>
+                        <p> By creating an account, you agree to our Terms and Conditions. </p> 
+                    </div>
+                    <div class="clearfix">
+                        <button type="button" onclick="location.href='signIn.html'" class="gobackbtn">Go Back</button>
+                        <button type="submit" class="signupbtn"> Create Account</button>
+                    </div>
+                </form>
+            <a id="homepage" href="index.html" alt="index"> Return to homepage</a>
+        </section>
+    </section> 
+    <div id="signUpModal" class="modal">
+        <div class = "modal-content">
+            <h4> Please select the type of account you wish to create.</h4>
+            <button type="button">
+                <a href="#" onclick="redirectEnduserSignup()" class="enduser"> End-user Account </a>
+            </button>
+            <button type="button">
+                <a href="#" onclick="redirectVendorSignup()" class="vendor"> Vendor Account </a>
+            </button>
+        </div>
+    </div> 
+    <script src="style/login_script.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Masters: Control Portal</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    
+    <header>
+        <div class="header_title">
+            <h1 class="header_h1">License Masters</h1>
+            <a href="index.html"><img src="assets/images/License_MasterLogo3.PNG" alt="License Masters"></a>
+            </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" alt="Home">Home</a></li>
+                <li><a href="nav2.html" alt="Shop">Shop</a></li>
+                <li><a href="nav3.html" alt="About Us">About Us</a></li>
+                <li><a href="nav4.html" alt="Contact Us">Contact Us</a></li>
+                <li class="cart-icon"><a href="cart.html"><img src="assets/images/cart-icon.png" alt=""></a></li>
+                <a button class="logoutbtn" href="index.html" alt="index"> Log Out </a> </button>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="control_section1">
+            <h2>Client Account Management - Control Portal</h1>
+            <h3>Welcome Back! John Doe!</h3>
+        </section>
+
+        <section class="control_section2">
+        <div class="client_info">
+            <h2>Client Information</h2><br>
+            <table class="control_table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="clientTable">
+                </tbody>
+            </table>
+        </div>
+        <div class="account_modifier">
+            <h2>Account Modifier</h2><br>
+            <form id="accountForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required><br>
+                <label for="address">Address:</label>
+                <input type="text" id="address" required><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email2" required><br><br>
+                <button type="button" id="createEditAccount">Create/Edit Account</button>
+                <button type="button" id="deleteAccount">Delete Account</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="serialNumbers_container">   
+        <div class="serialNum">
+            <h2>Serial Number Generator</h2><br>
+            <button type="button" id="generateSerial">Generate Serial Number</button>
+        </div>
+
+        <div class="sn_management">
+            <h2>Manage Serial Number</h2>
+            
+            <input type="text" id="serialNumber2" required><br>
+
+            <div class="button_container">
+            <button id="enableSerial">Enable</button> 
+            <button id="blockSerial">Block</button>
+            <button id="disableSerial">Disable</button>
+            </div>
+        </div>
+        </section>
+    
+        <section class="product_association">
+            <div class="pd_association">
+                <h2>Product Association</h2><br>
+                <form id="associationForm">
+                    <label for="clientSelect">Select Client:</label>
+                    <select id="clientSelect">
+                    </select><br><br>
+                    <label for="serialNumber">Serial Number:</label>
+                    <input type="text" id="serialNumber" required><br>
+                    <label for="product">Product:</label>
+                    <input type="text" id="product" required><br>
+                    <button type="button" id="associate">Associate</button>
+                 </form>
+            </div>
+
+            <div class="association_display">
+                <h2>All Associations</h2><br>
+                <table class="control_table">
+                    <thead>
+                        <tr>
+                            <th>Client</th>
+                            <th>Serial Number</th>
+                            <th>Product</th>
+                            <th>Purchase Date</th>
+                            <th>Expiry Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="associationTable">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <script src="style/control_portal.js"></script>
+
+        <section class="newsletter">
+            <h3>Get on the list!</h3>
+            <p>Enjoy early access, exclusive offers, and 15% off your first order.</p>
+            <form id="subscribeForm" onsubmit="subscribe(event)">
+                <input id="email" type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Submit</button>
+            </form>
+            <script>
+                function subscribe(event) {
+                    event.preventDefault(); // Prevent default form submission
+                    var email = document.getElementById('email').value;
+                    if (email !== '') {
+                        fetch('/subscribe', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ email: email })
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.text();
+                            }
+                            throw new Error('Network response was not ok.');
+                        })
+                        .then(data => {
+                            alert(data); // Show success message returned by the server
+                        })
+                        .catch(error => {
+                            console.error('Error subscribing to newsletter:', error);
+                            alert('Error subscribing to newsletter.');
+                        });
+                    } else {
+                        alert('Please enter a valid email address.');
+                    }
+                }
+            </script>
+        </section>
+    </main>
+
+    <footer>
+        <p> Copyright © License Masters All rights Reserved.
+    </footer>
+    
+</body>
+</html>

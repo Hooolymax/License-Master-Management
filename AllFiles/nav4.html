@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Masters: your software Licenses&apos; Manager</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="style/login_script.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header_title">
+            <h1 class="header_h1">License Masters</h1>
+            <a href="index.html"><img src="assets/images/License_MasterLogo3.PNG" alt="License Masters"></a>
+            </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" alt="Home">Home</a></li>
+                <li><a href="nav2.html" alt="Shop">Shop</a></li>
+                <li><a href="nav3.html" alt="About Us">About Us</a></li>
+                <li><a href="nav4.html" alt="Contact Us">Contact Us</a></li>
+                <li class="cart-icon"><a href="cart.html"><img src="assets/images/cart-icon.png" alt=""></a></li>
+                <div class="dropdown">
+                    <button class="dropbtn"> Log In </button>
+                    <div class="dropdown-content">
+                      <a href="#" onclick="redirectEnduser()" class="enduser"> End-user Platform </a>
+                      <a href="#" onclick="redirectVendor()" class="vendor"> Vendor Platform </a>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class = "form">
+            <h1 class = "title"> Contact Us </h1> <br>
+            <p class = "">
+                Thank you for reaching out to us! 
+                Your feedback and inquiries are important to us, and we appreciate the opportunity to assist you. 
+            </p> <br>
+            <p class = "">
+                Please use the form below to submit your message or use our contact information to reach us, and our dedicated team will get back to you as soon as possible. 
+                Whether you have questions about our products or services, need technical support, or simply want to share your thoughts, we are here to help. 
+            </p>
+
+            <div class = "information">
+                <img src="assets/images/email.png" class="icon" alt="" /> 
+                <p> licenseMasters@mail.com </p>
+            </div>
+
+            <div class = "information">
+                <img src="assets/images/phone.png" class="icon" alt="" />
+                <p> 123 - 456 - 7891 </p>
+            </div>
+
+            <div class = "information">
+                <img src="assets/images/map.png" class="icon" alt="" />
+                <p> 1550 De Maisonneuve West, Montreal, Qc Canada</p>
+            </div>
+        </div>
+
+        <div class = "contact-form">
+            <form id = "contactForm">
+                <label for="name"> Name </label>
+                <input type="text" id = "name" name="name" placeholder="Enter Name" required>
+            
+                <label for="email"> Email </label>
+                <input type="email" id = "email" name="email" placeholder="Enter Email" required>
+            
+                <label for="message"> Message </label>
+                <div class="input-container text">
+                    <textarea id = "message" name="message" class="input" placeholder="Enter Your Message" required></textarea>
+                </div>
+            
+                <input type="submit" class="btn" value="Submit" onclick="subscribe(event)">
+            </form>
+
+            <script>
+            function subscribe(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var name = document.getElementById('name').value;
+                var email = document.getElementById('email').value;
+                var message = document.getElementById('message').value;
+
+                fetch('/contacts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name: name, email: email, message: message })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    alert(data); // Show success message returned by the server
+                })
+                .catch(error => {
+                    console.error('Error submitting form:', error);
+                    alert('Error submitting form.');
+                });
+            }
+            </script>
+        </div>
+    </main>
+    
+    <footer>
+        <p> Copyright © License Masters All rights Reserved.
+    </footer>
+    
+</body>
+</html>
