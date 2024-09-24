@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Masters: Client Portal</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body id="client_body">
+    <header class="clientheader">
+        <div class="header_title">
+            <h1 class="header_h1">License Masters</h1>
+            <a href="index.html"><img src="assets/images/License_MasterLogo3.PNG" alt="License Masters"></a>
+            </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" alt="Home">Home</a></li>
+                <li><a href="nav2.html" alt="Shop">Shop</a></li>
+                <li><a href="nav3.html" alt="About Us">About Us</a></li>
+                <li><a href="nav4.html" alt="Contact Us">Contact Us</a></li>
+                <li class="cart-icon"><a href="cart.html"><img src="assets/images/cart-icon.png" alt=""></a></li>
+                <a button class="logoutbtn" href="index.html" alt="index"> Log Out </a> </button>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="clienmain">
+        <section class="client_section1">
+            <h4 id="clientName"> </h4>
+            <p id="clientEmail"> </p>
+                        
+            <div class="clearfix">
+                <a href = "editAccount.html"> <button id="editinfobtn"> Edit Information </button> </a>
+            </div>
+        </section>
+    
+        <section class="client_section2">
+    <!-- Active licenses table -->
+                <h3> Currently active licenses </h3>
+                <table class="client_table" id="activeLicenses">
+                    <thead> 
+                        <th> Serial Number </th>
+                        <th> Software </th>
+                        <th> Purchase Date </th>
+                        <th> Expiry Date </th>
+                        <th> Product Information </th>
+                    </thead>
+                    <!-- Placeholder for now, will have to generate serial numbers -->
+                    <tbody id="activeTableBody">
+
+                    <!-- <tr>
+                        <td> L23434305SX </td>
+                        <td> Microsoft Windows 10 Home </td>
+                        <td> 12/03/2023 </td>
+                        <td> 12/03/2024 </td>  
+                        <td>             
+                            <button class="dropbtn" id="dropbtn1"> More </button> 
+                                <div id="modal1" class="modal">
+                                    <div class="modal-content">
+                                        <span class="close"> &times; </span>
+                                        <h3> Product Information </h3>
+                                        <p>Duration: 1 year</p>
+                                        <p>Devices supported: 1</p>
+                                        <p>Minimum Hard Drive Space: 4 GB</p>
+                                        <p>Minimum Memory: 2 GB (32 Bit) / 4 GB (64 Bit)</p>
+                                        <p>Minimum Processor Speed: 1.6 GHz, 2 Core Processor</p>
+                                    </br>
+                                        <button class="renewbtn"> Renew Subscription </button> 
+                                        <button id="cancelbtn"> Cancel Subscription </button> 
+                                    </div> 
+                                </div>
+                        </td>  
+                    </tr> -->
+                        
+                    </tbody>
+
+                </table>       
+    <!-- Expired licenses table -->
+            <h3> Expired licenses </h3>
+            <table class="client_table" id="expiredLicenses">
+                <thead> 
+                    <th> Serial Number </th>
+                    <th> Software </th>
+                    <th> Purchase Date </th>
+                    <th> Expiry Date </th>
+                    <th> Product Information </th>
+                </thead>
+                <tbody id="inactiveTableBody">
+                    <!--Placeholder for now, will have to generate serial numbers -->
+                    <!-- <tr>
+                        <td> K3891233SX </td>
+                        <td> Adobe Creative Cloud </td>
+                        <td> 14/09/2022 </td>
+                        <td> 14/09/2023 </td>  
+                        <td>             
+                            <button id = "renewbtn1"> Renew </button> 
+                        </td>  
+                    </tr> -->
+                </tbody>
+
+            </table>   
+        <!--Modal to add new licenses-->
+            <div id="addinglicenses">
+                <h3>Got new licenses to add?</h3>
+                <button class="dropbtn">Add New License</button>
+                <div id="modal4" class="modal">
+                    <div class = "modal-content">
+                        <h3> Entering a new license </h3>
+                            <form name="newLicenseForm" method="post" action="/">
+                                <div id="newlicense">
+                                    <label>Serial Number:</label>
+                                    <input type ="text" id="sn" name="sn" required>
+                                    <label>Software:</label>
+                                    <input type="text" id="software" name="software" required>
+                                    <label>Purchase date:</label>
+                                    <input type="date" id="purchasedate" name="purchasedate" required>
+                                    <label>Expiry date:</label>
+                                    <input type="date" id="expirydate" name="expirydate" required>
+                                    <label>Additional product information:</label>
+                                    <textarea id="productinfo" name="productinfo" rows="5"></textarea>
+                                    <input type="submit" name="Add" id="confirmbtn" name="confirmNewSn" id="confirmbtn" value="Confirm">
+                            </form>
+                                <button type="button" id="cancelbtn" class="close"> Cancel </button>
+                            </div>
+                        </br>
+                    </div> 
+                </div>
+            </div>
+        </section>
+
+        <!--Footer & newsletter-->
+        <section class="newsletter">
+            <h3>Get on the list!</h3>
+            <p>Enjoy early access, exclusive offers, and 15% off your first order.</p>
+            <form id="subscribeForm" onsubmit="subscribe(event)">
+                <input id="email" type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Submit</button>
+            </form>
+            <script>
+                function subscribe(event) {
+                    event.preventDefault(); // Prevent default form submission
+                    var email = document.getElementById('email').value;
+                    if (email !== '') {
+                        fetch('/subscribe', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ email: email })
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.text();
+                            }
+                            throw new Error('Network response was not ok.');
+                        })
+                        .then(data => {
+                            alert(data); // Show success message returned by the server
+                        })
+                        .catch(error => {
+                            console.error('Error subscribing to newsletter:', error);
+                            alert('Error subscribing to newsletter.');
+                        });
+                    } else {
+                        alert('Please enter a valid email address.');
+                    }
+                }
+            </script>
+        </section>
+    </main>
+    
+    <script src="style\client.js"> </script> 
+
+</body>
+</html>
